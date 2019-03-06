@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', startGame)
 var board = {cells:[{row:0,col:0,isMine:false,isMarked: false,hidden:true,surroundingMines: 1},
                     {row:0,col:1,isMine:false,isMarked: false,hidden:true,surroundingMines: 0},
                     {row:0,col:2,isMine:false,isMarked:false,hidden:true,surroundingMines: 0},
-                    {row:1,col:0,isMine:true,isMarked:true,hidden:true,surroundingMines: 0},
+                    {row:1,col:0,isMine:true,isMarked:false,hidden:true,surroundingMines: 0},
                     {row:1,col:1,isMine:false,isMarked: false,hidden:true,surroundingMines: 0},
                     {row:1,col:2,isMine:false,isMarked: false,hidden:true,surroundingMines: 0},
                     {row:2,col:0,isMine:false,isMarked: false,hidden:true,surroundingMines: 2},
-                    {row:2,col:1,isMine:true,isMarked: true,hidden:true,surroundingMines: 0},
+                    {row:2,col:1,isMine:true,isMarked: false,hidden:true,surroundingMines: 0},
                     {row:2,col:2,isMine:false,isMarked: false,hidden:true,surroundingMines: 1},]
 
 };
@@ -22,37 +22,41 @@ function startGame (cells) {
       countSurroundingMines[i][j]=0;
     }
   }
+  
   lib.initBoard() 
-
+  
   }
 
- document.addEventListener('click', checkForWin);
+document.addEventListener('click', checkForWin);
 // Define this function to look for a win condition:
 //
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  
+  debugger;
+  // var countHiddenMines=0;
   var countTotalMines = 0;
   var countMarkedMines = 0;
   for (var i = 0; i < board.cells.length; i++) {
-    if (board.cells[i].isMine === true) {
-      countTotalMines++;
-    }
-    if (board.cells[i].isMine === true && board.cells[i].isMarked === true) {
-      countMarkedMines++;
-    }
-    if (board.cells[i].hidden === true && board.cells[i].isMine === false) {
-      return;
-    }
-  }
-
-  if  (countTotalMines===countMarkedMines) {
-    lib.displayMessage('You Win!!');
-  } else {
+  if (board.cells[i].hidden === true && board.cells[i].isMine === false)
+   {
     return;
   }
+    if (board.cells[i].isMine === true) {
+      countTotalMines++;
+    }if(board.cells[i].isMine === true && board.cells[i].isMarked === true) 
+    {
+      countMarkedMines++;
     }
+  
+  if  (countTotalMines===countMarkedMines) {
+    lib.displayMessage('You Win!!');
+  }else {
+    return;
+  }
+}
+    }
+  
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   //   lib.displayMessage('You win!')
