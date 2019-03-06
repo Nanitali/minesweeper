@@ -33,7 +33,7 @@ document.addEventListener('click', checkForWin);
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  debugger;
+  
   // var countHiddenMines=0;
   var countTotalMines = 0;
   var countMarkedMines = 0;
